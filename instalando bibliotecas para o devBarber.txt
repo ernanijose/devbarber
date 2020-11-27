@@ -1,0 +1,77 @@
+criando o projeto devber
+
+Caso o computador não tenha o react-native-cli ainda instalado
+$ npm install -g react-native-cli
+
+$ npx react-native init app
+
+entre na pasta app
+$ npm install styled-components
+
+$ npm install @react-navigation/native
+
+$ npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+$ npm install @react-navigation/stack
+
+Abra o arquivo index.js na raiz do projeto e coloque antes dos import que já tem no arquivo, o seguinte import
+import 'react-native-gesture-handler';
+
+$ npm install @react-navigation/bottom-tabs
+
+$ npm install @react-native-community/async-storage //este serve gerenciar o token de login
+
+$ npm install @react-native-community/geolocation
+
+$ npm install react-native-permissions
+
+Abra o arquivo em: android/app/src/main/AndroidManifest.xml e coloque a seguinte linha onde está assim:
+<uses-permission android:name="android.permission.INTERNET" />
+coloque logo abaixo a seguinte linha:
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+$ npm install react-native-swiper
+
+$ npm install react-native-svg
+
+$ npm install react-native-svg-transformer
+
+Agora altere o arquivo metro.config.js, onde ele esta assim:
+module.exports = {
+  transformer: {
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: false,
+        inlineRequires: false,
+      },
+    }),
+  },
+};
+
+deixe-o com o conteudo assim:
+const { getDefaultConfig } = require("metro-config");
+
+module.exports = (async () => {
+  const {
+    resolver: { sourceExts, assetExts }
+  } = await getDefaultConfig();
+  return {
+    transformer: {
+      getTransformOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineRequires: false,
+        },
+      }),
+      babelTransformerPath: require.resolve("react-native-svg-transformer")
+    },
+    resolver: {
+      assetExts: assetExts.filter(ext => ext !== "svg"),
+      sourceExts: [...sourceExts, "svg"]
+    }
+  };
+})();
+
+
+executando o projeto
+$ npx react-native run-android //rodando para o android
