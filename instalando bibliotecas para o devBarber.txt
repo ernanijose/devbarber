@@ -75,3 +75,12 @@ module.exports = (async () => {
 
 executando o projeto
 $ npx react-native run-android //rodando para o android
+
+Caso baixe o projeto do git e acontece erro para ele iniciar ou subir execute o seguinte
+acessa a pasta android
+e execute o arquivo gradlew
+se for no windows
+$ gradlew.bat clean
+caso esteja no linux, der permissão ao mesmo e execute o arquivo
+$ chmod +x gradlew
+$ ./gradlew clean
